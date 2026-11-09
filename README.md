@@ -209,10 +209,6 @@ Do not commit `frontend/.env.local` or place privileged Supabase keys in browser
 
 ## Service account ownership
 
-OnBoard uses separate service accounts for Clerk and Supabase. The account email addresses are intentionally kept outside this public repository. They are recorded privately by the project owner and must not be added to source files, documentation, commit messages, or issue reports.
-
-- Clerk account label: `seanpincas28`. Clerk owns authentication, email verification, and session configuration.
-- Supabase account label: `seanpdev28`. Supabase owns the PostgreSQL database, PostGIS, Storage, Realtime, and database project configuration.
-- The two services are connected through Clerk's Supabase third-party authentication integration.
+See the [service account context](context/service-accounts.md). Full email addresses and credentials stay outside this public repository.
 
 Update this README as project decisions are agreed upon.
