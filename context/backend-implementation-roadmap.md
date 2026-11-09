@@ -385,7 +385,7 @@ Resolve these at the relevant phase rather than blocking all implementation:
 | 3. Clerk and onboarding | In progress | Server Clerk/Supabase bridge, profile routes, onboarding routes, and Zod validation added. Database-backed verification awaits migration application |
 | 4. Guest sessions | In progress | Opaque cookie session, session hash storage, tenant/landlord demo profiles, role switching, expiry lookup, and reset marker added. Full data cloning/reset and isolation checks await migration application |
 | 5. Inventory and images | In progress | Owner-scoped property, room, bed-space, photo metadata, PostGIS creation, and publication validation routes added. Storage upload flow and live RLS checks await migration application |
-| 6. Discovery and geography | Not started | Roadmap only |
+| 6. Discovery and geography | In progress | Public listing search route and PostGIS search function added for city, text, budget, room type, availability, pagination, and radius filtering. Migration application and provider-specific geocoding remain pending |
 | 7. Reservations and occupancy | Not started | Roadmap only |
 | 8. Chat | Not started | Roadmap only |
 | 9. Demo dataset | Not started | Roadmap only |

@@ -287,8 +287,8 @@ Use **Planned**, **Mocked**, **Connected**, **Verified**, or **Blocked**. Connec
 | Guest entry/switch/reset/expiry | 4 | Connected | `frontend/src/app/api/guest/session/route.ts` | TypeScript passed; `SUPABASE_SECRET_KEY` and migration required for live verification |
 | Property/room/bed management | 5 | Connected | `frontend/src/app/api/landlord/properties` | TypeScript/build passed; database migration still unapplied |
 | Images and publication | 5 | Connected | `frontend/src/app/api/landlord/properties/[propertyId]/photos` | Metadata/publication checks added; storage upload still pending |
-| Feed and listing detail | 6 | Planned | Not implemented | Public listing DTOs and pagination |
-| Address/landmark and radius search | 6 | Planned | Not implemented | Search contract and provider decision |
+| Feed and listing detail | 6 | Connected | `frontend/src/app/api/listings/route.ts` | TypeScript/build passed; listing migration still unapplied |
+| Address/landmark and radius search | 6 | Connected | `frontend/src/app/api/listings/route.ts` | PostGIS radius contract added; geocoding provider remains undecided |
 | Viewings and reservations | 7 | Planned | Not implemented | Transition/actions/error contract |
 | Occupancy and available counts | 7 | Planned | Not implemented | Authoritative availability response |
 | Chat history/send/updates | 8 | Planned | Not implemented | Participant and transport contract |

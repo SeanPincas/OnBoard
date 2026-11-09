@@ -93,6 +93,16 @@ These routes require an authenticated Clerk user whose application profile has t
 
 Validation is in `frontend/src/lib/validation/inventory.ts`, landlord authorization context is in `frontend/src/lib/supabase/landlord.ts`, and the PostGIS creation function is in `backend/supabase/migrations/20261109000300_inventory_functions.sql`. Live checks still await applying migrations.
 
+## Implemented operation: public listing search
+
+`GET /api/listings` is the shared feed and map search contract. It is publicly readable and returns only published listing data.
+
+Supported query parameters include `city`, `search`, `minRent`, `maxRent`, `roomType`, `includeUnavailable`, `latitude`, `longitude`, `radiusMeters`, `limit`, and `offset`. Latitude, longitude, and radius must be supplied together. Rent values are monthly PHP amounts, and radius is in meters.
+
+The response is `{ "data": [...], "meta": { "limit": number, "offset": number } }`. Each result includes property/room IDs, titles, city, address, coordinates, rental basis, monthly rent, capacity, available count, photo metadata, and `distance_meters` when a center point is supplied.
+
+The PostGIS function is `public.search_listings` in `backend/supabase/migrations/20261109000400_listing_search.sql`. The route is `frontend/src/app/api/listings/route.ts`, with query validation in `frontend/src/lib/validation/listings.ts`. Address/geocoding lookup is still provider-independent and manual pinning is supported by the contract.
+
 ## Contract conventions to settle in Phase 1
 
 - Success/error envelopes, field-level validation, and status codes.
