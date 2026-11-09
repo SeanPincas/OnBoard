@@ -389,7 +389,7 @@ Resolve these at the relevant phase rather than blocking all implementation:
 | 4. Guest sessions | In progress | Opaque cookie session, session hash storage, tenant/landlord demo profiles, role switching, expiry lookup, and reset marker added. Full data cloning/reset and isolation checks await migration application |
 | 5. Inventory and images | In progress | Owner-scoped property, room, bed-space, photo metadata, PostGIS creation, and publication validation routes added. Storage upload flow and live RLS checks await migration application |
 | 6. Discovery and geography | In progress | Public listing search route and PostGIS search function added for city, text, budget, room type, availability, pagination, and radius filtering. Migration application and provider-specific geocoding remain pending |
-| 7. Reservations and occupancy | Not started | Roadmap only |
-| 8. Chat | Not started | Roadmap only |
+| 7. Reservations and occupancy | In progress | Reservation request/review RPCs and API routes implemented; hosted migration and live concurrency checks pending |
+| 8. Chat | In progress | Conversation/message APIs, Guest isolation routes, Realtime authorization migration, and client helper implemented; hosted migration and live channel checks pending |
 | 9. Demo dataset | Not started | Roadmap only |
 | 10. Integration and handoff | Not started | Roadmap only |

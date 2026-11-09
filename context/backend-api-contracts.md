@@ -2,7 +2,7 @@
 
 ## Readiness
 
-Phases 1 through 7 are in progress. The HTTP operations below are implemented against versioned contracts, but database-backed requests require the migrations to be applied first. Claude Code must use these route paths and must not treat a successful build as proof of database readiness.
+Phases 1 through 8 are in progress. The HTTP operations below are implemented against versioned contracts, but database-backed requests require the migrations to be applied first. Claude Code must use these route paths and must not treat a successful build as proof of database readiness.
 
 The initial schema migration is at `backend/supabase/migrations/20261109000100_onboard_foundation.sql`. It establishes the domain tables, PostGIS location type, constraints, indexes, and initial RLS policies. It has not been applied to local or hosted Supabase yet.
 

@@ -208,7 +208,7 @@ Payments, reviews, formal identity verification, video reels, and route-based tr
 
 ## Implementation roadmaps
 
-- [Backend implementation roadmap](context/backend-implementation-roadmap.md): phases, completion checks, dependencies, and progress. Phase 1 has started.
+- [Backend implementation roadmap](context/backend-implementation-roadmap.md): phases, completion checks, dependencies, and progress. Backend Phases 1–8 have started; hosted migration and live verification remain pending.
 - [Frontend implementation guide for Claude Code](context/frontend-implementation-guide.md): context-gathering instructions, phased frontend work, backend dependencies, integration tracking, and handoff rules. Claude Code owns frontend implementation; Codex owns backend implementation.
 - [Service setup checklist](context/service-setup-checklist.md): owner account setup, local environment variables, and service configuration.
 - [Backend API contracts](context/backend-api-contracts.md): actual implemented operations and explicit contract gaps.
