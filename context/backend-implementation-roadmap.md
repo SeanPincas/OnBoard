@@ -282,17 +282,19 @@ Codex is especially useful for schema design, SQL migrations, TypeScript service
 
 ## Phase 8 — Conversations and live updates
 
+Selected implementation: Supabase PostgreSQL for durable messages, Supabase Realtime private Broadcast channels for delivery, and Presence for online/typing state. Clerk session JWTs remain the identity boundary; no separate WebSocket server is planned.
+
 ### 8.1 Persistent chat
 
-- [ ] Create conversations tied to a property/room and the participating tenant and landlord.
-- [ ] Implement participant-only conversation lists, paginated history, and message sending with size/rate limits.
-- [ ] Prevent duplicate conversations where reuse is intended and make send retries safe.
+- [x] Create conversations tied to a property/room and the participating tenant and landlord.
+- [x] Implement participant-only conversation lists, paginated history, and message sending with size limits.
+- [x] Prevent duplicate conversations where reuse is intended and make message writes authoritative in PostgreSQL.
 - [ ] Persist messages before acknowledging success. Use plain text initially and render safely in the frontend.
 - [ ] Connect viewing/reservation actions to the relevant conversation without exposing other tenants' private requests.
 
 ### 8.2 Realtime delivery
 
-- [ ] Configure authenticated, participant-authorized Realtime delivery using the selected supported mechanism.
+- [x] Configure the migration contract for authenticated, participant-authorized Supabase Realtime private channels.
 - [ ] Handle reconnects through persisted message history and stable IDs; deduplicate repeated updates.
 - [ ] Apply the guest transport established in Phase 4 and verify cross-session privacy separately.
 

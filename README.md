@@ -4,7 +4,7 @@ OnBoard is a planned boarding-house discovery and reservation web app focused on
 
 ## Project status
 
-Backend Phases 1 through 7 have started with the shared Next.js scaffold, initial dependencies, Supabase CLI configuration, environment template, process-liveness endpoint, versioned database migrations, Clerk profile/onboarding routes, isolated Guest sessions, owner-scoped inventory routes, public listing/radius search, and a transactional reservation/occupancy workflow. Chat and hosted deployment workflows are not implemented yet. The agreed stack is Next.js, TypeScript, Tailwind CSS, Clerk, Supabase, and MapLibre GL JS.
+Backend Phases 1 through 8 have started with the shared Next.js scaffold, initial dependencies, Supabase CLI configuration, environment template, process-liveness endpoint, versioned database migrations, Clerk profile/onboarding routes, isolated Guest sessions, owner-scoped inventory routes, public listing/radius search, transactional reservation/occupancy workflow, and the persistent chat/Realtime contract. Hosted deployment workflows are not implemented yet. The agreed stack is Next.js, TypeScript, Tailwind CSS, Clerk, Supabase, and MapLibre GL JS.
 
 ## Folder structure
 

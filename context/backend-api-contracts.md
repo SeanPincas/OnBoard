@@ -115,6 +115,19 @@ The route sources are `frontend/src/app/api/reservations/route.ts` and `frontend
 
 Live RLS, locking, and concurrent-confirmation behavior remain pending because the project migrations have intentionally not yet been applied to hosted Supabase.
 
+## Implemented operations: conversations and messages
+
+Phase 8 uses Supabase PostgreSQL as the durable source of truth and Supabase Realtime private channels for delivery. Broadcast payloads are not treated as message history; clients reload persisted messages after reconnecting.
+
+- `GET /api/conversations` lists conversations visible to the authenticated participant.
+- `POST /api/conversations` accepts `propertyId`, optional `roomId`, and optional `tenantProfileId`. The database function creates or reuses the tenant–landlord conversation with an advisory transaction lock.
+- `GET /api/conversations/:conversationId/messages?limit=50&before=<ISO timestamp>` returns participant-only message history in chronological order.
+- `POST /api/conversations/:conversationId/messages` accepts `{ "body": "..." }`, validates 1–4000 trimmed characters, and persists through `send_message` after checking participant membership.
+
+The route sources are `frontend/src/app/api/conversations/route.ts` and `frontend/src/app/api/conversations/[conversationId]/messages/route.ts`. Validation is in `frontend/src/lib/validation/chat.ts`. The database and Realtime authorization contract is in `backend/supabase/migrations/20261109000600_chat_realtime.sql`.
+
+Clients should subscribe to private `conversation:{conversationId}` channels using the Clerk session token. Presence is reserved for online/typing state and should not replace persisted messages. Live channel authorization and reconnect behavior remain pending migration application and frontend integration.
+
 ## Contract conventions to settle in Phase 1
 
 - Success/error envelopes, field-level validation, and status codes.
