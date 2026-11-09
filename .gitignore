@@ -1,0 +1,16 @@
+# Local credentials (examples are safe to commit)
+.env
+.env.*
+!.env.example
+**/.env
+**/.env.*
+!**/.env.example
+
+# Generated dependencies and build state
+**/node_modules/
+**/.next/
+**/coverage/
+**/*.tsbuildinfo
+backend/supabase/.temp/
+backend/supabase/.branches/
+desktop.ini
