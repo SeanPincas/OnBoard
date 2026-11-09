@@ -291,7 +291,7 @@ Use **Planned**, **Mocked**, **Connected**, **Verified**, or **Blocked**. Connec
 | Address/landmark and radius search | 6 | Connected | `frontend/src/app/api/listings/route.ts` | PostGIS radius contract added; geocoding provider remains undecided |
 | Viewings and reservations | 7 | Connected | `frontend/src/app/api/reservations/route.ts`, `frontend/src/app/api/reservations/[reservationId]/route.ts` | Reservation actions and actor checks are wired; migration/live conflict verification pending |
 | Occupancy and available counts | 7 | Connected | `review_reservation_request`, `search_listings` | Transactional allocation and availability checks are wired; migration/live conflict verification pending |
-| Chat history/send/updates | 8 | Connected | `frontend/src/app/api/conversations`, Supabase Realtime private `conversation:{id}` channels | PostgreSQL history and send APIs wired; frontend subscriptions and hosted migration pending |
+| Chat history/send/updates | 8 | Connected | `frontend/src/app/api/conversations`, `frontend/src/app/api/guest/conversations`, Supabase Realtime private `conversation:{id}` channels | PostgreSQL history/send APIs and Guest server boundary wired; frontend subscriptions and hosted migration pending |
 | Two-city demo records and images | 9 | Planned | Not generated | Seed IDs and asset manifest |
 
 ## Handoff notes and backend change requests

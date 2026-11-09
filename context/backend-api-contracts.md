@@ -128,6 +128,13 @@ The route sources are `frontend/src/app/api/conversations/route.ts` and `fronten
 
 Clients should subscribe to private `conversation:{conversationId}` channels using the Clerk session token. Presence is reserved for online/typing state and should not replace persisted messages. Live channel authorization and reconnect behavior remain pending migration application and frontend integration.
 
+Guest chat uses a separate HTTP-only-cookie boundary because Guest actors do not have Clerk JWTs:
+
+- `GET/POST /api/guest/conversations` lists or creates conversations for the active Guest actor.
+- `GET/POST /api/guest/conversations/:conversationId/messages` lists or persists messages only when the active Guest profile is a participant.
+
+Guest chat routes use the server-only Supabase secret and never expose it to the browser. They intentionally use persisted HTTP operations until a dedicated Guest Realtime identity is selected; registered users use private Realtime channels.
+
 ## Contract conventions to settle in Phase 1
 
 - Success/error envelopes, field-level validation, and status codes.

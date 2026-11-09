@@ -11,7 +11,7 @@ function hashSessionToken(token: string) {
   return createHash("sha256").update(token).digest("hex");
 }
 
-function createGuestAdminClient() {
+export function createGuestAdminClient() {
   const environment = getPublicEnvironment();
   const secretKey = process.env.SUPABASE_SECRET_KEY;
 
@@ -22,6 +22,35 @@ function createGuestAdminClient() {
   return createClient(environment.NEXT_PUBLIC_SUPABASE_URL, secretKey, {
     auth: { autoRefreshToken: false, persistSession: false },
   });
+}
+
+export async function getGuestContext(token: string) {
+  const supabase = createGuestAdminClient();
+  const tokenHash = hashSessionToken(token);
+  const { data: session, error: sessionError } = await supabase
+    .from("guest_sessions")
+    .select("id, active_role, expires_at, reset_at")
+    .eq("session_token_hash", tokenHash)
+    .gt("expires_at", new Date().toISOString())
+    .maybeSingle();
+
+  if (sessionError || !session) return null;
+
+  const { data: actors, error: actorError } = await supabase
+    .from("profiles")
+    .select("id, role, display_name")
+    .eq("guest_session_id", session.id);
+
+  if (actorError) throw new Error("Guest actors lookup failed");
+  const actor = actors?.find((candidate) => candidate.role === session.active_role);
+  if (!actor) return null;
+
+  await supabase
+    .from("guest_sessions")
+    .update({ last_seen_at: new Date().toISOString() })
+    .eq("id", session.id);
+
+  return { supabase, session, actors: actors ?? [], actor };
 }
 
 export function guestCookieOptions() {

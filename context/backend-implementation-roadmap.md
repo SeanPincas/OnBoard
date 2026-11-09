@@ -295,8 +295,9 @@ Selected implementation: Supabase PostgreSQL for durable messages, Supabase Real
 ### 8.2 Realtime delivery
 
 - [x] Configure the migration contract for authenticated, participant-authorized Supabase Realtime private channels.
+- [x] Add a server-only Guest chat boundary that scopes conversation and message reads/writes to the active Guest session.
 - [ ] Handle reconnects through persisted message history and stable IDs; deduplicate repeated updates.
-- [ ] Apply the guest transport established in Phase 4 and verify cross-session privacy separately.
+- [ ] Apply the guest transport established in Phase 4 and verify cross-session privacy separately. Guest HTTP chat is implemented; Guest Realtime identity remains a later decision.
 
 **Done when:** two authorized participants exchange persistent messages, reconnect without losing history, and an unrelated actor cannot read or subscribe to their conversation.
 
