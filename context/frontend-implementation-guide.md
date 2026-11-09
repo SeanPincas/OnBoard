@@ -282,8 +282,8 @@ Use **Planned**, **Mocked**, **Connected**, **Verified**, or **Blocked**. Connec
 
 | Capability | Backend phase | Current status | Actual operation / contract source | Verification evidence or next dependency |
 | --- | --- | --- | --- | --- |
-| Application identity and private profile | 3 | Planned | Not implemented | Clerk and profile contract |
-| Onboarding save/resume/complete | 3 | Planned | Not implemented | Onboarding contract |
+| Application identity and private profile | 3 | Connected | `frontend/src/app/api/profile/route.ts` | TypeScript passed; database migration still unapplied |
+| Onboarding save/resume/complete | 3 | Connected | `frontend/src/app/api/onboarding/route.ts` | TypeScript passed; database migration still unapplied |
 | Guest entry/switch/reset/expiry | 4 | Planned | Not implemented | Guest session contract |
 | Property/room/bed management | 5 | Planned | Not implemented | Owner-scoped inventory contract |
 | Images and publication | 5 | Planned | Not implemented | Storage/upload and publication contract |

@@ -26,6 +26,48 @@ This checks the application process only. It does not access or report Clerk, Po
 
 Verification: production build passed and a temporary localhost production server returned the documented JSON from `GET /api/health`. The test server was stopped afterward. Database startup and hosted-provider readiness have not been verified.
 
+## Implemented operations: authenticated profile and onboarding contracts
+
+These route handlers are implemented but require the foundation migration to be applied before database-backed requests can succeed. They use the Clerk session and forward its token to Supabase. Unauthenticated requests return HTTP 401.
+
+### `GET /api/profile`
+
+Returns the current actor's profile or `null` when a profile has not been created.
+
+### `PUT /api/profile`
+
+Validates and upserts the current actor's profile. The Clerk user ID is taken from the verified server session and cannot be supplied by the request body.
+
+```json
+{
+  "role": "tenant",
+  "displayName": "Demo Tenant",
+  "profilePhotoUrl": null,
+  "contactPhone": null,
+  "permanentAddress": null,
+  "age": null,
+  "gender": null,
+  "studentOrEmploymentStatus": "student"
+}
+```
+
+### `GET /api/onboarding`
+
+Returns the current actor's saved `onboarding_progress` and `onboarding_completed_at` values. A profile that does not exist returns an empty progress object.
+
+### `PATCH /api/onboarding`
+
+Saves partial onboarding progress or marks it complete for the current actor.
+
+```json
+{
+  "progress": { "step": "tenant-preferences", "city": "manila_city" },
+  "completed": false
+}
+```
+
+Route source files are `frontend/src/app/api/profile/route.ts` and `frontend/src/app/api/onboarding/route.ts`. The shared Clerk/Supabase bridge is in `frontend/src/lib/supabase/server.ts`, with Zod validation in `frontend/src/lib/validation/profile.ts`.
+
 ## Contract conventions to settle in Phase 1
 
 - Success/error envelopes, field-level validation, and status codes.
