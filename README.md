@@ -207,4 +207,12 @@ Open `http://localhost:3000`. The compose health check calls `GET /api/health`. 
 
 Do not commit `frontend/.env.local` or place privileged Supabase keys in browser-visible variables. The compose file reads the local environment file into the application container for development; production hosting should use its own secret configuration.
 
+## Service account ownership
+
+OnBoard uses separate service accounts for Clerk and Supabase. The account email addresses are intentionally kept outside this public repository. They are recorded privately by the project owner and must not be added to source files, documentation, commit messages, or issue reports.
+
+- Clerk owns authentication, email verification, and session configuration.
+- Supabase owns the PostgreSQL database, PostGIS, Storage, Realtime, and database project configuration.
+- The two services are connected through Clerk's Supabase third-party authentication integration.
+
 Update this README as project decisions are agreed upon.
