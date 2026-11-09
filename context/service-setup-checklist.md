@@ -59,7 +59,7 @@ If account setup requires sign-in, MFA, billing selection, or acceptance of serv
 | `CLERK_SECRET_KEY` | Server only | Phase 3 authentication |
 | `NEXT_PUBLIC_SUPABASE_URL` | Public project/local URL | Database integration |
 | `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` | Public API key, subject to access policies | Database integration |
-| `SUPABASE_SECRET_KEY` | Privileged server only | Later Guest/session administration if required |
+| `SUPABASE_SECRET_KEY` | Privileged server only | Guest/session administration in Phase 4; leave blank until the Guest service is ready to verify |
 
 The `NEXT_PUBLIC_` prefix means a value may be included in browser code. Public keys still require correctly implemented access policies; a public key is not landlord authorization.
 

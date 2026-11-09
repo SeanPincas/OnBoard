@@ -383,7 +383,7 @@ Resolve these at the relevant phase rather than blocking all implementation:
 | 1. Foundation and contracts | In progress | Shared scaffold, CLI configuration, environment template, and liveness route; production build and localhost health smoke check passed. Full feature contracts and database startup still pending |
 | 2. Database and access | In progress | Foundation migration added with PostGIS, core entities, constraints, indexes, and initial RLS policies. Migration application and policy checks still pending |
 | 3. Clerk and onboarding | In progress | Server Clerk/Supabase bridge, profile routes, onboarding routes, and Zod validation added. Database-backed verification awaits migration application |
-| 4. Guest sessions | Not started | Roadmap only |
+| 4. Guest sessions | In progress | Opaque cookie session, session hash storage, tenant/landlord demo profiles, role switching, expiry lookup, and reset marker added. Full data cloning/reset and isolation checks await migration application |
 | 5. Inventory and images | Not started | Roadmap only |
 | 6. Discovery and geography | Not started | Roadmap only |
 | 7. Reservations and occupancy | Not started | Roadmap only |

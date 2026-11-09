@@ -68,6 +68,17 @@ Saves partial onboarding progress or marks it complete for the current actor.
 
 Route source files are `frontend/src/app/api/profile/route.ts` and `frontend/src/app/api/onboarding/route.ts`. The shared Clerk/Supabase bridge is in `frontend/src/lib/supabase/server.ts`, with Zod validation in `frontend/src/lib/validation/profile.ts`.
 
+## Implemented operations: Guest session boundary
+
+These operations use an opaque HTTP-only cookie named `onboard_guest_session`. Only its SHA-256 hash is stored in `guest_sessions`. They require the server-only `SUPABASE_SECRET_KEY` and the Phase 4 migration. Guest records must be accessed through these server services, not a browser Supabase client.
+
+- `POST /api/guest/session` creates one session with tenant and landlord demo profiles.
+- `GET /api/guest/session` returns the current session and its two demo actors, or `null` after expiry.
+- `PATCH /api/guest/session` accepts `{ "role": "tenant" | "landlord" }` and changes only the active demo role.
+- `DELETE /api/guest/session` records a reset marker for the current session. Full template-data reset will be added when guest listing/session-owned data is introduced.
+
+The session service is in `frontend/src/lib/guest-session.ts`. The database migration is `backend/supabase/migrations/20261109000200_guest_sessions.sql`. Guest operations have TypeScript coverage through the production build, but live database isolation has not been verified while migrations remain unapplied.
+
 ## Contract conventions to settle in Phase 1
 
 - Success/error envelopes, field-level validation, and status codes.
