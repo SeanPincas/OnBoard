@@ -4,7 +4,7 @@ OnBoard is a planned boarding-house discovery and reservation web app focused on
 
 ## Project status
 
-Backend Phase 1 (foundation) has started with the shared Next.js scaffold, initial dependencies, Supabase CLI configuration, environment template, and a process-liveness endpoint. Product features and hosted service integrations are not implemented yet. The agreed stack is Next.js, TypeScript, Tailwind CSS, Clerk, Supabase, and MapLibre GL JS.
+Backend Phases 1 and 2 have started with the shared Next.js scaffold, initial dependencies, Supabase CLI configuration, environment template, process-liveness endpoint, and the first versioned database migration. Product feature APIs and hosted deployment workflows are not implemented yet. The agreed stack is Next.js, TypeScript, Tailwind CSS, Clerk, Supabase, and MapLibre GL JS.
 
 ## Folder structure
 

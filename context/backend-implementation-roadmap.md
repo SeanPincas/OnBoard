@@ -381,7 +381,7 @@ Resolve these at the relevant phase rather than blocking all implementation:
 | Phase | Status | Evidence / outstanding work |
 | --- | --- | --- |
 | 1. Foundation and contracts | In progress | Shared scaffold, CLI configuration, environment template, and liveness route; production build and localhost health smoke check passed. Full feature contracts and database startup still pending |
-| 2. Database and access | Not started | Roadmap only |
+| 2. Database and access | In progress | Foundation migration added with PostGIS, core entities, constraints, indexes, and initial RLS policies. Migration application and policy checks still pending |
 | 3. Clerk and onboarding | Not started | Roadmap only |
 | 4. Guest sessions | Not started | Roadmap only |
 | 5. Inventory and images | Not started | Roadmap only |
