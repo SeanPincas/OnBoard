@@ -126,7 +126,7 @@ Phase 8 uses Supabase PostgreSQL as the durable source of truth and Supabase Rea
 
 The route sources are `frontend/src/app/api/conversations/route.ts` and `frontend/src/app/api/conversations/[conversationId]/messages/route.ts`. Validation is in `frontend/src/lib/validation/chat.ts`. The database and Realtime authorization contract is in `backend/supabase/migrations/20261109000600_chat_realtime.sql`.
 
-Clients should subscribe to private `conversation:{conversationId}` channels using the Clerk session token. Presence is reserved for online/typing state and should not replace persisted messages. Live channel authorization and reconnect behavior remain pending migration application and frontend integration.
+Clients should subscribe to private `conversation:{conversationId}` channels using the Clerk session token. The reusable client transport helper is `frontend/src/lib/supabase/realtime.ts`; it defines `message` Broadcast payloads and Presence payloads with `{ userId, typing }`. Presence is reserved for online/typing state and should not replace persisted messages. Live channel authorization and reconnect behavior remain pending migration application and frontend integration.
 
 Guest chat uses a separate HTTP-only-cookie boundary because Guest actors do not have Clerk JWTs:
 
