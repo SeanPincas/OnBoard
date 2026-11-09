@@ -79,6 +79,20 @@ These operations use an opaque HTTP-only cookie named `onboard_guest_session`. O
 
 The session service is in `frontend/src/lib/guest-session.ts`. The database migration is `backend/supabase/migrations/20261109000200_guest_sessions.sql`. Guest operations have TypeScript coverage through the production build, but live database isolation has not been verified while migrations remain unapplied.
 
+## Implemented operations: landlord inventory foundation
+
+These routes require an authenticated Clerk user whose application profile has the `landlord` role. They are owner-scoped through Supabase RLS.
+
+- `GET /api/landlord/properties` lists the current landlord's properties.
+- `POST /api/landlord/properties` creates a draft property and converts latitude/longitude to a PostGIS point through `create_property`.
+- `PATCH /api/landlord/properties/:propertyId` changes draft, published, or archived state. Publishing requires at least one room and four property photos.
+- `GET /api/landlord/properties/:propertyId/rooms` lists rooms owned through the property.
+- `POST /api/landlord/properties/:propertyId/rooms` creates a private or shared room with an enforced rental basis.
+- `POST /api/landlord/rooms/:roomId/bed-spaces` creates a bed space in an owned room.
+- `POST /api/landlord/properties/:propertyId/photos` records an owned listing photo and enforces a six-photo maximum. Upload/signing and storage-bucket setup are a later slice.
+
+Validation is in `frontend/src/lib/validation/inventory.ts`, landlord authorization context is in `frontend/src/lib/supabase/landlord.ts`, and the PostGIS creation function is in `backend/supabase/migrations/20261109000300_inventory_functions.sql`. Live checks still await applying migrations.
+
 ## Contract conventions to settle in Phase 1
 
 - Success/error envelopes, field-level validation, and status codes.

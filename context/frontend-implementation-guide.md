@@ -285,8 +285,8 @@ Use **Planned**, **Mocked**, **Connected**, **Verified**, or **Blocked**. Connec
 | Application identity and private profile | 3 | Connected | `frontend/src/app/api/profile/route.ts` | TypeScript passed; database migration still unapplied |
 | Onboarding save/resume/complete | 3 | Connected | `frontend/src/app/api/onboarding/route.ts` | TypeScript passed; database migration still unapplied |
 | Guest entry/switch/reset/expiry | 4 | Connected | `frontend/src/app/api/guest/session/route.ts` | TypeScript passed; `SUPABASE_SECRET_KEY` and migration required for live verification |
-| Property/room/bed management | 5 | Planned | Not implemented | Owner-scoped inventory contract |
-| Images and publication | 5 | Planned | Not implemented | Storage/upload and publication contract |
+| Property/room/bed management | 5 | Connected | `frontend/src/app/api/landlord/properties` | TypeScript/build passed; database migration still unapplied |
+| Images and publication | 5 | Connected | `frontend/src/app/api/landlord/properties/[propertyId]/photos` | Metadata/publication checks added; storage upload still pending |
 | Feed and listing detail | 6 | Planned | Not implemented | Public listing DTOs and pagination |
 | Address/landmark and radius search | 6 | Planned | Not implemented | Search contract and provider decision |
 | Viewings and reservations | 7 | Planned | Not implemented | Transition/actions/error contract |
