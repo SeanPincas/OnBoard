@@ -10,11 +10,31 @@ Backend Phase 1 (foundation) has started with the shared Next.js scaffold, initi
 
 ```text
 OnBoard/
-├── frontend/    # Next.js application, UI, and server routes
-├── backend/     # Supabase migrations, seed data, and database functions
-├── context/     # Future specifications, design references, and project decisions
-└── README.md    # Main project context and agreed scope
+├── frontend/                         # Next.js application, UI, and server routes
+│   ├── src/app/                      # App Router pages, layout, styles, and API routes
+│   │   └── api/health/               # Process-liveness endpoint
+│   ├── public/                       # Static frontend assets
+│   ├── Dockerfile                    # Production frontend image
+│   ├── .env.example                  # Safe environment-variable template
+│   ├── package.json                  # Frontend dependencies and scripts
+│   └── next.config.ts                # Next.js standalone container configuration
+├── backend/                          # Supabase database tooling and configuration
+│   ├── supabase/                     # Local CLI project, migrations, seeds, and database config
+│   ├── package.json                  # Supabase CLI scripts
+│   └── README.md                     # Backend tooling commands
+├── context/                          # Specifications, roadmaps, and project decisions
+│   ├── backend-implementation-roadmap.md
+│   ├── frontend-implementation-guide.md
+│   ├── backend-api-contracts.md
+│   ├── service-setup-checklist.md
+│   └── service-accounts.md
+├── docker-compose.yml                # Production-style local app container
+├── .dockerignore                     # Docker build exclusions
+├── .gitignore                        # Git and local-secret exclusions
+└── README.md                         # Main project context and agreed scope
 ```
+
+Generated folders such as `node_modules/`, `.next/`, local environment files, and Supabase temporary state are intentionally excluded from version control.
 
 ## Product direction
 
