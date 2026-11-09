@@ -2,7 +2,7 @@
 
 ## Readiness
 
-Phase 1 and the first Phase 2 database migration are in progress. Only the process-liveness operation below is implemented as an HTTP endpoint. Auth, onboarding, Guest sessions, listings, search, reservations, and chat operations are planned, not callable APIs yet. Claude Code must not guess their route paths or treat the health endpoint as proof of database readiness.
+Phases 1 through 7 are in progress. The HTTP operations below are implemented against versioned contracts, but database-backed requests require the migrations to be applied first. Claude Code must use these route paths and must not treat a successful build as proof of database readiness.
 
 The initial schema migration is at `backend/supabase/migrations/20261109000100_onboard_foundation.sql`. It establishes the domain tables, PostGIS location type, constraints, indexes, and initial RLS policies. It has not been applied to local or hosted Supabase yet.
 
@@ -102,6 +102,18 @@ Supported query parameters include `city`, `search`, `minRent`, `maxRent`, `room
 The response is `{ "data": [...], "meta": { "limit": number, "offset": number } }`. Each result includes property/room IDs, titles, city, address, coordinates, rental basis, monthly rent, capacity, available count, photo metadata, and `distance_meters` when a center point is supplied.
 
 The PostGIS function is `public.search_listings` in `backend/supabase/migrations/20261109000400_listing_search.sql`. The route is `frontend/src/app/api/listings/route.ts`, with query validation in `frontend/src/lib/validation/listings.ts`. Address/geocoding lookup is still provider-independent and manual pinning is supported by the contract.
+
+## Implemented operations: reservation and occupancy workflow
+
+These routes use Clerk authentication and Supabase RLS. State-changing actions execute transactional database functions so confirmation performs a fresh availability check and creates exactly one reservation allocation. Pending requests do not consume inventory; confirmed allocations are reserved; move-in changes them to occupied.
+
+- `GET /api/reservations` lists reservations visible to the current tenant or landlord.
+- `POST /api/reservations` accepts a tenant request with `propertyId`, `roomId`, optional `bedSpaceId`, `requestedOccupants`, `intendedMoveIn`, and an optional message. It calls `create_reservation_request` and snapshots the current monthly rent.
+- `PATCH /api/reservations/:reservationId` accepts `{ "action": "confirm" | "decline" | "cancel" | "move_in" }`. Tenant cancellation and landlord review are actor-checked in the database. Confirmation returns a conflict when capacity or bed availability has changed.
+
+The route sources are `frontend/src/app/api/reservations/route.ts` and `frontend/src/app/api/reservations/[reservationId]/route.ts`. Validation is in `frontend/src/lib/validation/reservations.ts`. The authoritative functions, transition rules, and allocation constraints are in `backend/supabase/migrations/20261109000500_reservation_workflow.sql`.
+
+Live RLS, locking, and concurrent-confirmation behavior remain pending because the project migrations have intentionally not yet been applied to hosted Supabase.
 
 ## Contract conventions to settle in Phase 1
 

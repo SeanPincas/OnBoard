@@ -289,8 +289,8 @@ Use **Planned**, **Mocked**, **Connected**, **Verified**, or **Blocked**. Connec
 | Images and publication | 5 | Connected | `frontend/src/app/api/landlord/properties/[propertyId]/photos` | Metadata/publication checks added; storage upload still pending |
 | Feed and listing detail | 6 | Connected | `frontend/src/app/api/listings/route.ts` | TypeScript/build passed; listing migration still unapplied |
 | Address/landmark and radius search | 6 | Connected | `frontend/src/app/api/listings/route.ts` | PostGIS radius contract added; geocoding provider remains undecided |
-| Viewings and reservations | 7 | Planned | Not implemented | Transition/actions/error contract |
-| Occupancy and available counts | 7 | Planned | Not implemented | Authoritative availability response |
+| Viewings and reservations | 7 | Connected | `frontend/src/app/api/reservations/route.ts`, `frontend/src/app/api/reservations/[reservationId]/route.ts` | Reservation actions and actor checks are wired; migration/live conflict verification pending |
+| Occupancy and available counts | 7 | Connected | `review_reservation_request`, `search_listings` | Transactional allocation and availability checks are wired; migration/live conflict verification pending |
 | Chat history/send/updates | 8 | Planned | Not implemented | Participant and transport contract |
 | Two-city demo records and images | 9 | Planned | Not generated | Seed IDs and asset manifest |
 

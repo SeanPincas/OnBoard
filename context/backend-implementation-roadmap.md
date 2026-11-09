@@ -263,16 +263,16 @@ Codex is especially useful for schema design, SQL migrations, TypeScript service
 ### 7.1 Request lifecycle
 
 - [ ] Define a transition table with allowed actors for pending, confirmed, declined, cancelled, and any agreed expiry states. Keep request status separate from inventory/occupancy status.
-- [ ] Implement viewing requests and reservation submission, owner review, tenant cancellation, and move-in handling.
-- [ ] Store requested occupants, intended move-in date, agreed price snapshot, and the exact requested inventory.
+- [x] Implement reservation submission, owner review, tenant cancellation, and move-in handling. Viewing-specific requests remain a later refinement.
+- [x] Store requested occupants, intended move-in date, agreed price snapshot, and the exact requested inventory.
 - [ ] Validate capacity and disclosed accommodation restrictions without silently guessing a person's gender from their name.
 - [ ] Settle cancellation, confirmation expiry, and move-out rules before enabling their corresponding transitions; avoid introducing automatic expiry without an agreed policy.
 
 ### 7.2 Concurrency and availability
 
-- [ ] Confirm reservations in a single database transaction with appropriate locking/constraints and a fresh availability check.
-- [ ] Make retries safe: duplicate submissions or repeated confirmation must not allocate twice.
-- [ ] Keep pending requests from consuming inventory; confirmed reservations consume it, and move-in changes the allocation to occupied.
+- [x] Confirm reservations in a single database transaction with row locks, constraints, and a fresh availability check.
+- [x] Make retries safe: repeated confirmation is rejected after the first transition and allocation is created once.
+- [x] Keep pending requests from consuming inventory; confirmed reservations consume it, and move-in changes the allocation to occupied.
 - [ ] Release inventory only through authorized, valid transitions. Return clear conflicts when another request wins.
 - [ ] Check two simultaneous confirmations for the last slot, multi-occupant capacity, separate beds in the same room, cancellation, and retry behavior.
 
